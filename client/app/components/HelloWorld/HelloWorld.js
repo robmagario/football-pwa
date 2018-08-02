@@ -15,6 +15,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -140,6 +144,10 @@ class HelloWorld extends React.Component {
           </IconButton>
         </div>
         <Divider />
+        <List><FontAwesomeIcon icon="accessible-icon" /></List>
+        <Divider />
+        <List></List>
+
       </Drawer>
     );
 
@@ -182,7 +190,7 @@ class HelloWorld extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-                Persistent drawer
+                Habudo
               </Typography>
             </Toolbar>
           </AppBar>
