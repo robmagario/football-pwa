@@ -26,38 +26,22 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    zIndex:1
   },
   appFrame: {
     height: 430,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
+    zIndex: theme.zIndex.drawer + 1,
+    position: 'absolute',
     display: 'flex',
     width: '100%',
   },
   appBar: {
-    position: 'absolute',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+    position: 'fixed',
 
-    }),
     backgroundColor: '#000000',
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  'appBarShift-left': {
-    marginLeft: drawerWidth,
-  },
-  'appBarShift-right': {
-    marginRight: drawerWidth,
-  },
   menuButton: {
+
     marginLeft: 12,
     marginRight: 20,
   },
@@ -65,6 +49,7 @@ const styles = theme => ({
     display: 'none',
   },
   drawerPaper: {
+    zIndex:1,
     position: 'relative',
     width: drawerWidth,
     backgroundColor: '#18211F',
@@ -73,43 +58,29 @@ const styles = theme => ({
     fontSize: 13,
     fontWeight: 500,
     minHeight: 40,
+
   },
   drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
+    marginTop:'3vw',
 
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
   },
-  'content-left': {
-    marginLeft: -drawerWidth,
+  list: {
+    marginRight: '1.2rem',
+    marginTop: '-.25rem',
+    paddingLeft: '15px',
+    display: 'inline-block',
   },
-  'content-right': {
-    marginRight: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
+  fontawesomeicon: {
+    marginLeft: '1.2rem',
+    marginTop: '-.25rem',
+    textAlign: 'center',
+    width: '1.2rem',
+    display: 'inline-block',
+    textAlign: 'center',
 
-  'contentShift-left': {
-    marginLeft: 0,
-  },
-  'contentShift-right': {
-    marginRight: 0,
-  },
+
+  }
+
 });
 
 class HelloWorld extends React.Component {
@@ -151,16 +122,14 @@ class HelloWorld extends React.Component {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
+
         </div>
         <Divider />
         <div className="group-label">Quick Links</div>
 
-        <List><FontAwesomeIcon icon={faFutbol} /> Futebol</List>
+        <List ><div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faFutbol} style={{width:'1.25rem', height:'1.25rem'}}/></div><div className={classes.list}>Futebol</div></List>
         <Divider />
-        <List><FontAwesomeIcon icon={faUsers} /> Política</List>
+        <List ><div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUsers} style={{width:'1.25rem', height:'1.25rem'}}/></div><div className={classes.list}>Política</div></List>
 
       </Drawer>
     );
@@ -176,19 +145,19 @@ class HelloWorld extends React.Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.appFrame}>
+        <div className={classes.appFrame} >
           <AppBar
             className={classNames(classes.appBar, {
-              [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
+
             })}
           >
             <Toolbar disableGutters={!open}>
               <IconButton
+
                 color="inherit"
                 aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, open && classes.hide)}
+                onClick={(!open)?this.handleDrawerOpen:this.handleDrawerClose}
+                className={classNames(classes.menuButton, open)}
               >
                 <MenuIcon />
               </IconButton>
@@ -198,11 +167,9 @@ class HelloWorld extends React.Component {
             </Toolbar>
           </AppBar>
           {before}
-          <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
-              [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
-            })}
+          <main onClick={this.handleDrawerClose}
+
+
           >
             <div className={classes.drawerHeader} />
             <Typography>{'You think water moves fast? You should see ice.'}</Typography>
