@@ -17,7 +17,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import {faFutbol} from '@fortawesome/free-solid-svg-icons'
 
 
@@ -67,6 +67,9 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: drawerWidth,
+    backgroundColor: '#18211F',
+    color: "#ffffff",
+
   },
   drawerHeader: {
     display: 'flex',
@@ -96,6 +99,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+
   'contentShift-left': {
     marginLeft: 0,
   },
@@ -150,7 +154,7 @@ class HelloWorld extends React.Component {
         <Divider />
         <List><FontAwesomeIcon icon={faFutbol} /> Futebol</List>
         <Divider />
-        <List><FontAwesomeIcon icon="facebook" />aaaaaaaaaaasssssss</List>
+        <List><FontAwesomeIcon icon={faUsers} /> Política</List>
 
       </Drawer>
     );
