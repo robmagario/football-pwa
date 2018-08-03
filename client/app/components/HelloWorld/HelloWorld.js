@@ -69,7 +69,9 @@ const styles = theme => ({
     width: drawerWidth,
     backgroundColor: '#18211F',
     color: "#ffffff",
-
+    fontFamily: 'Source Sans Pro',
+    fontSize: 13,
+    fontWeight: 500,
   },
   drawerHeader: {
     display: 'flex',
