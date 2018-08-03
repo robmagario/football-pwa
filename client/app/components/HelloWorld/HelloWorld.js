@@ -18,6 +18,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
+import {faFutbol} from '@fortawesome/free-solid-svg-icons'
+
 
 const drawerWidth = 240;
 
@@ -38,7 +40,9 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+
     }),
+    backgroundColor: '#000000',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -144,9 +148,9 @@ class HelloWorld extends React.Component {
           </IconButton>
         </div>
         <Divider />
-        <List><FontAwesomeIcon icon="accessible-icon" /></List>
+        <List><FontAwesomeIcon icon={faFutbol} /> Futebol</List>
         <Divider />
-        <List></List>
+        <List><FontAwesomeIcon icon="facebook" />aaaaaaaaaaasssssss</List>
 
       </Drawer>
     );
@@ -162,17 +166,6 @@ class HelloWorld extends React.Component {
 
     return (
       <div className={classes.root}>
-        <TextField
-          id="persistent-anchor"
-          select
-          label="Anchor"
-          value={anchor}
-          onChange={this.handleChangeAnchor}
-          margin="normal"
-        >
-          <MenuItem value="left">left</MenuItem>
-          <MenuItem value="right">right</MenuItem>
-        </TextField>
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {
