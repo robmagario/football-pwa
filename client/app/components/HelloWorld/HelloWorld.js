@@ -72,6 +72,7 @@ const styles = theme => ({
     fontFamily: 'Source Sans Pro',
     fontSize: 13,
     fontWeight: 500,
+    minHeight: 40,
   },
   drawerHeader: {
     display: 'flex',
@@ -80,6 +81,7 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -154,6 +156,8 @@ class HelloWorld extends React.Component {
           </IconButton>
         </div>
         <Divider />
+        <div className="group-label">Quick Links</div>
+
         <List><FontAwesomeIcon icon={faFutbol} /> Futebol</List>
         <Divider />
         <List><FontAwesomeIcon icon={faUsers} /> Política</List>
