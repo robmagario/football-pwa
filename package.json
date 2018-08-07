@@ -11,7 +11,8 @@
   "private": true,
   "scripts": {
     "start": "webpack -p --progress --profile --colors && node server",
-    "start:dev": "node server"
+    "start:dev": "node server",
+    "build":  "webpack --config webpack.config.js"
   },
   "engines": {
     "node": ">=6"
