@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MatchList from "../MatchList/MatchList"
 import 'whatwg-fetch';
 
 import {
@@ -264,7 +265,7 @@ class Home extends Component {
 
     return (
       <div>
-        <p>Account</p>
+        <MatchList/>
         <button onClick={this.logout}>Logout</button>
       </div>
     );
