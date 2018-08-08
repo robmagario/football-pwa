@@ -17,7 +17,12 @@ import HelloWorld from './components/HelloWorld/HelloWorld';
 
 import './styles/styles.scss';
 
+import {Provider} from 'react-redux'
+import Store from './store.js'
+const storeInstance = Store();
+
 render((
+  <Provider store={storeInstance}>
   <Router>
     <App>
       <Switch>
@@ -27,4 +32,5 @@ render((
       </Switch>
     </App>
   </Router>
+  </Provider>
 ), document.getElementById('app'));
