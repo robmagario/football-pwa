@@ -14,7 +14,6 @@ module.exports = (app) => {
     let {
       email
     } = body;
-
     if (!email) {
       return res.send({
         success: false,
@@ -54,6 +53,7 @@ module.exports = (app) => {
 
       newUser.email = email;
       newUser.password = newUser.generateHash(password);
+
       newUser.save((err, user) => {
         if (err) {
           return res.send({
@@ -124,6 +124,7 @@ module.exports = (app) => {
       // Otherwise correct user
       const userSession = new UserSession();
       userSession.userId = user._id;
+      userSession.adminStatus=user.isAdmin;
       userSession.save((err, doc) => {
         if (err) {
           console.log(err);
@@ -136,6 +137,7 @@ module.exports = (app) => {
         return res.send({
           success: true,
           message: 'Valid sign in',
+          isAdmin:user.isAdmin,
           token: doc._id
         });
       });
@@ -205,5 +207,5 @@ module.exports = (app) => {
         message: 'Good'
       });
     });
-  });
+  })
 };

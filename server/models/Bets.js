@@ -20,11 +20,15 @@ const BetsSchema = new mongoose.Schema({
     type:Number,
     default:0
   },
-
   currentOdds:{
     type:Number,
     default:0
+  },
+  prediction:{
+    type:String,
+    default:''
   }
+
 
 });
 module.exports = mongoose.model('Bet', BetsSchema);

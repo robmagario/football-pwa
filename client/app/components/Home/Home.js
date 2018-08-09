@@ -20,6 +20,7 @@ class Home extends Component {
       signInPassword: '',
       signUpEmail: '',
       signUpPassword: '',
+      isitAdmin:false,
     };
 
     this.onTextboxChangeSignInEmail = this.onTextboxChangeSignInEmail.bind(this);
@@ -127,6 +128,7 @@ class Home extends Component {
     const {
       signInEmail,
       signInPassword,
+      isitAdmin
     } = this.state;
 
     this.setState({
@@ -154,6 +156,7 @@ class Home extends Component {
             signInPassword: '',
             signInEmail: '',
             token: json.token,
+            isitAdmin:json.isAdmin
           });
         } else {
           this.setState({
@@ -265,7 +268,7 @@ class Home extends Component {
 
     return (
       <div>
-        <MatchList/>
+        {(this.state.isitAdmin)?<p>Admin</p>:<p>Hi</p>}
         <button onClick={this.logout}>Logout</button>
       </div>
     );
