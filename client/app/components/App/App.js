@@ -69,7 +69,7 @@ const styles = theme => ({
 
   },
   drawerHeader: {
-    marginTop:'3vw',
+    marginTop:'6vw',
 
   },
   flex: {
@@ -90,7 +90,7 @@ const styles = theme => ({
     textAlign: 'center',
   },
   button: {
-    
+
     color: "#ffffff",
     backgroundColor: "#00b073",
   },
@@ -198,7 +198,7 @@ class App extends React.Component {
 
 
           >
-            <div className={classes.drawerHeader}/>
+            <div className={classes.drawerHeader} />
             <Home/>
           </main>
           {after}
