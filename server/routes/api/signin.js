@@ -172,7 +172,8 @@ module.exports = (app) => {
       } else {
         return res.send({
           success: true,
-          message: 'Good'
+          message: 'Good',
+          admin:sessions.adminStatus
         });
       }
     });
