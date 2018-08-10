@@ -19,7 +19,7 @@ class EventListAdmin extends Component {
         <ul>
         {this.props.upcomingList.map(events=>
           <li>Name:{events.name} Category:{events.category} Amount:{events.amount}
-            <a href="/services">Click to view options</a></li>
+            <a href={events.slug}>Click to view options</a></li>
         )}
         </ul>
       </div>
