@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MatchList from "../MatchList/MatchList"
+import EventListAdmin from "../EventListAdmin/EventListAdmin"
 import 'whatwg-fetch';
 
 import {
@@ -44,11 +44,13 @@ class Home extends Component {
           if (json.success) {
             this.setState({
               token,
-              isLoading: false
+              isLoading: false,
+              isitAdmin:json.admin
             });
           } else {
             this.setState({
               isLoading: false,
+
             });
           }
         });
@@ -268,7 +270,7 @@ class Home extends Component {
 
     return (
       <div>
-        {(this.state.isitAdmin)?<p>Admin</p>:<p>Hi</p>}
+        {(this.state.isitAdmin)?<EventListAdmin/>:<p>Hi User!</p>}
         <button onClick={this.logout}>Logout</button>
       </div>
     );

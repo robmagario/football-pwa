@@ -22,4 +22,12 @@ module.exports = (app)=>{
       });
     });
   });
+  app.get('/api/event/getevents',(req,res,next)=>{
+    Event.find({},(err,events)=>{
+      return res.send({
+        success:true,
+        eventList:events
+      })
+    });
+  })
 };

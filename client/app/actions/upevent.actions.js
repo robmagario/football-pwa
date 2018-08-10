@@ -29,13 +29,13 @@ export const requestUpcomingError=(error)=>{
 export function getUpcoming(){
   return function(dispatch){
     dispatch(requestUpcoming());
-    return fetch("https://cors-anywhere.herokuapp.com/https://api.betsapi.com/v2/events/upcoming?sport_id=1&token=8984-1OAGIlKV4MjR92&league_id=155")
+    return fetch("/api/event/getevents")
       .then(
         res=>res.json(),
         error=>console.log("Error",error),
       )
       .then(json=>
-      dispatch(requestUpcomingSuccess(json.results))
+      dispatch(requestUpcomingSuccess(json.eventList))
       ).catch(error=>{
         console.error(error);
         dispatch(requestUpcomingError(error))
