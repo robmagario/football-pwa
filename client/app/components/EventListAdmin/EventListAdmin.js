@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import Timestamp from "react-timestamp";
 import 'whatwg-fetch';
 import {getUpcoming} from "../../actions/upevent.actions";
+import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 class EventListAdmin extends Component {
   componentWillMount(){
@@ -16,7 +18,8 @@ class EventListAdmin extends Component {
       <div>
         <ul>
         {this.props.upcomingList.map(events=>
-          <li>Name:{events.name} Category:{events.category} Amount:{events.amount} <button>Click to view options</button></li>
+          <li>Name:{events.name} Category:{events.category} Amount:{events.amount}
+            <a href="/services">Click to view options</a></li>
         )}
         </ul>
       </div>
