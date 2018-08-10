@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Link,
   Switch
@@ -14,22 +14,23 @@ import Home from './components/Home/Home';
 
 import HelloWorld from './components/HelloWorld/HelloWorld';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './styles/styles.scss';
-
-import {Provider} from 'react-redux'
-import Store from './store.js'
+import {Provider} from 'react-redux';
+import Store from './store.js';
+const theme = createMuiTheme();
 const storeInstance = Store();
 
 render((
   <Provider store={storeInstance}>
-  <Router>
-    <App>
-      <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route path="/helloworld" component={HelloWorld}/>
-        <Route component={NotFound}/>
-      </Switch>
-    </App>
-  </Router>
+    <React.Fragment>
+
+      <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </MuiThemeProvider>
+
+    </React.Fragment>
   </Provider>
 ), document.getElementById('app'));

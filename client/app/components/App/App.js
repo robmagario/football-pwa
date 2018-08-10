@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Home from '../Home/Home';
+import Main from '../Main';
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 import {withStyles} from "@material-ui/core/styles/index";
 import classNames from "classnames";
@@ -199,7 +199,7 @@ class App extends React.Component {
 
           >
             <div className={classes.drawerHeader} />
-            <Home/>
+            <Main/>
           </main>
           {after}
         </div>
