@@ -44,7 +44,7 @@ const styles = theme => ({
   },
   appBar: {
     position: 'fixed',
-    marginLeft: '1.5rem',
+
 
     backgroundColor: '#000000',
   },
@@ -90,8 +90,9 @@ const styles = theme => ({
     textAlign: 'center',
   },
   button: {
-    marginLeft: 'auto',
-    position: "absolute",
+    
+    color: "#ffffff",
+    backgroundColor: "#00b073",
   },
   input: {
     display: 'none',
@@ -189,7 +190,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-
+              <Button variant="contained" className={classes.button} >Login</Button>
             </Toolbar>
           </AppBar>
           {before}
