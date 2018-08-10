@@ -20,6 +20,10 @@ const OptionSchema = new mongoose.Schema({
   thumbnail:{
     type:String,
     default:''
+  },
+  isDisabled:{
+    type:Boolean,
+    default:false
   }
 
 });
