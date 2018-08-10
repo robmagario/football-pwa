@@ -9,6 +9,7 @@ import classNames from "classnames";
 import PropTypes from 'prop-types';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,6 +23,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import {faFutbol} from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 library.add(faStroopwafel);
@@ -41,6 +44,7 @@ const styles = theme => ({
   },
   appBar: {
     position: 'fixed',
+    marginLeft: '1.5rem',
 
     backgroundColor: '#000000',
   },
@@ -68,6 +72,9 @@ const styles = theme => ({
     marginTop:'3vw',
 
   },
+  flex: {
+    flexGrow: 1,
+  },
   list: {
     marginRight: '1.2rem',
     marginTop: '-.25rem',
@@ -81,9 +88,15 @@ const styles = theme => ({
     width: '1.2rem',
     display: 'inline-block',
     textAlign: 'center',
+  },
+  button: {
+    marginLeft: 'auto',
+    position: "absolute",
+  },
+  input: {
+    display: 'none',
+  },
 
-
-  }
 
 });
 
@@ -98,6 +111,7 @@ class App extends React.Component {
   }
 
   render() {
+
 
     this.handleDrawerOpen = () => {
       this.setState({open: true});
@@ -114,6 +128,7 @@ class App extends React.Component {
     };
     const {classes, theme} = this.props;
     const {anchor, open} = this.state;
+
 
     const drawer = (
       <Drawer
@@ -160,9 +175,8 @@ class App extends React.Component {
       <div className={classes.root}>
         <div className={classes.appFrame}>
           <AppBar
-            className={classNames(classes.appBar, {})}
-          >
-            <Toolbar disableGutters={!open}>
+            className={classNames(classes.appBar, {})}>
+            <Toolbar>
               <IconButton
 
                 color="inherit"
@@ -172,9 +186,10 @@ class App extends React.Component {
               >
                 <MenuIcon/>
               </IconButton>
-              <Typography variant="title" color="inherit" noWrap>
+              <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
+
             </Toolbar>
           </AppBar>
           {before}
