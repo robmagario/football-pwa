@@ -93,9 +93,18 @@ const styles = theme => ({
 
     color: "#ffffff",
     backgroundColor: "#00b073",
+    fontSize: "0.7rem",
+    height: "0.7rem",
+    letterSpacing: "0.1rem",
   },
   input: {
     display: 'none',
+  },
+  toolBar: {
+    minHeight: '0.5rem',
+  },
+  a: {
+    textDecoration: "none",
   },
 
 
@@ -177,7 +186,7 @@ class App extends React.Component {
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {})}>
-            <Toolbar>
+            <Toolbar className={classes.toolBar}>
               <IconButton
 
                 color="inherit"
@@ -190,7 +199,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-              <Button variant="contained" className={classes.button} >Login</Button>
+              <a className={classes.a} href={"./members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
             </Toolbar>
           </AppBar>
           {before}

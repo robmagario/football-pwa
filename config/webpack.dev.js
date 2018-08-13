@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 
 const commonConfig = require('./webpack.common');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 
 module.exports = merge(commonConfig, {
   devtool: 'eval-source-map',
@@ -23,5 +25,14 @@ module.exports = merge(commonConfig, {
     contentBase: './client/public',
     historyApiFallback: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
-  }
+  },
+
+    // ...
+    plugins: [
+      new FriendlyErrorsWebpackPlugin(),
+    ],
+    // ...
+
+
+
 });

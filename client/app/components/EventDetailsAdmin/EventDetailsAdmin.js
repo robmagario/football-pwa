@@ -12,13 +12,15 @@ class EventDetailsAdmin extends Component {
     this.props.getUpcoming();
   }
 
+
   render(){
+  const { router, params, location, routes } = this.props
 
       return(
         <div>
           <ul>
 
-              <li>ddddddd</li>
+              <li>{location.pathname}</li>
 
           </ul>
         </div>
