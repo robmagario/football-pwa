@@ -216,7 +216,7 @@ class Login extends Component {
 
     if (!token) {
       return (
-        <div className=".form-page-header">
+        <div id="login-page">
           <div class=".form-page-header">
             {
               (signInError) ? (
@@ -224,21 +224,25 @@ class Login extends Component {
               ) : (null)
             }
             <h1>Entrar</h1>
+            <label htmlFor="login-form-email" className="field-label">Email</label>
             <input
               type="email"
               placeholder="Email"
               value={signInEmail}
               onChange={this.onTextboxChangeSignInEmail}
+              className="form-input"
             />
             <br />
+            <label htmlFor="login-form-password" className="field-label">Senha</label>
             <input
               type="password"
               placeholder="Password"
               value={signInPassword}
               onChange={this.onTextboxChangeSignInPassword}
+              className="form-input"
             />
             <br />
-            <button onClick={this.onSignIn}>Sign In</button>
+            <button className="micro-button -accented " onClick={this.onSignIn}>Entrar</button>
           </div>
           <br />
           <br />

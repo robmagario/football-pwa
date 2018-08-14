@@ -26,3 +26,55 @@ h1 {
   font-family: Source Sans Pro,sans-serif;
   font-weight: lighter;
 }
+
+label {
+  color: #00b073;
+  font-size: .75rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 5px 0 0;
+}
+
+.form-input {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  margin: .1em 0;
+  border-bottom: 1px solid #c3c3c3;
+}
+
+#login-page {
+  max-width: 500px;
+}
+
+.micro-button.-accented {
+  color: #fff;
+  background-color: #00b073;
+  border-radius: .125rem;
+}
+
+.micro-button {
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: 1px solid #00b073;
+  padding: .5rem 1rem;
+  margin: 1rem 0;
+}
+.form-page-content form button {
+  width: 100%;
+  font-size: 1rem;
+}
