@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import EventListAdmin from "../EventListAdmin/EventListAdmin"
+import EventListAdmin from "./EventListAdmin/EventListAdmin"
 import 'whatwg-fetch';
 
 import {
   getFromStorage,
   setInStorage,
-} from '../../utils/storage';
+} from './../utils/storage';
 
-class Home extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -216,14 +216,14 @@ class Home extends Component {
 
     if (!token) {
       return (
-        <div>
-          <div>
+        <div className=".form-page-header">
+          <div class=".form-page-header">
             {
               (signInError) ? (
                 <p>{signInError}</p>
               ) : (null)
             }
-            <p>Sign In</p>
+            <h1>Entrar</h1>
             <input
               type="email"
               placeholder="Email"
@@ -241,7 +241,7 @@ class Home extends Component {
             <button onClick={this.onSignIn}>Sign In</button>
           </div>
           <br />
-
+          <br />
           <div>
             {
               (signUpError) ? (
@@ -277,4 +277,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Login;

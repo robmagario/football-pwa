@@ -28,7 +28,7 @@ import {faFutbol} from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faStroopwafel);
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const styles = theme => ({
   root: {
@@ -41,12 +41,20 @@ const styles = theme => ({
     position: 'absolute',
     display: 'flex',
     width: '100%',
+    backgroundColor: "black",
   },
   appBar: {
     position: 'fixed',
 
 
     backgroundColor: '#000000',
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
 
@@ -70,7 +78,9 @@ const styles = theme => ({
   },
   drawerHeader: {
     marginTop:'6vw',
-
+  },
+  hide: {
+    display: 'none',
   },
   flex: {
     flexGrow: 1,
@@ -105,6 +115,34 @@ const styles = theme => ({
   },
   a: {
     textDecoration: "none",
+  },
+  content: {
+    flexGrow: 1,
+    //backgroundColor: theme.palette.background.default,
+    backgroundColor: "black",
+    padding: theme.spacing.unit * 3,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  'content-left': {
+    marginLeft: -drawerWidth,
+  },
+  'content-right': {
+    marginRight: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  'contentShift-left': {
+    marginLeft: 0,
+  },
+  'contentShift-right': {
+    marginRight: 0,
   },
 
 
@@ -186,7 +224,7 @@ class App extends React.Component {
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {})}>
-            <Toolbar className={classes.toolBar}>
+            <Toolbar className={classes.toolBar} >
               <IconButton
 
                 color="inherit"
@@ -203,12 +241,16 @@ class App extends React.Component {
             </Toolbar>
           </AppBar>
           {before}
-          <main onClick={this.handleDrawerClose}
 
-
-          >
+            <main onClick={this.handleDrawerClose}
+              className={classNames(classes.content, classes[`content-${anchor}`], {
+                [classes.contentShift]: open,
+                [classes[`contentShift-${anchor}`]]: open,
+              })}
+            >
             <div className={classes.drawerHeader} />
             <Main/>
+
           </main>
           {after}
         </div>
