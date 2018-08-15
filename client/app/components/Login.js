@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import EventListAdmin from "./EventListAdmin/EventListAdmin"
 import 'whatwg-fetch';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
 import {
   getFromStorage,
   setInStorage,
 } from './../utils/storage';
+import {faUsers} from "@fortawesome/free-solid-svg-icons/index";
 
 class Login extends Component {
   constructor(props) {
@@ -217,7 +219,7 @@ class Login extends Component {
     if (!token) {
       return (
         <div id="login-page">
-          <div class=".form-page-header">
+          <div className=".form-page-header">
             {
               (signInError) ? (
                 <p>{signInError}</p>
@@ -234,13 +236,24 @@ class Login extends Component {
             />
             <br />
             <label htmlFor="login-form-password" className="field-label">Senha</label>
-            <input
-              type="password"
-              placeholder="Password"
-              value={signInPassword}
-              onChange={this.onTextboxChangeSignInPassword}
-              className="form-input"
-            />
+
+
+            <div className="inputbox"><span className="before"></span>
+              <input
+                type="password"
+                placeholder="Password"
+                value={signInPassword}
+                onChange={this.onTextboxChangeSignInPassword}
+                className="form-input"
+              />
+              <span className="after">
+              <button className="password-reveal -show" title="Show password" type="button" tabIndex="-1"><FontAwesomeIcon icon={faEye}
+                                                                                                                           style={{width: '1.25rem', height: '1.25rem'}}/>
+            </button>
+            </span>
+            </div>
+
+
             <br />
             <button className="micro-button -accented " onClick={this.onSignIn}>Entrar</button>
           </div>

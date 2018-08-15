@@ -237,7 +237,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-              <a className={classes.a} href={"./members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
+              <a className={classes.a} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
             </Toolbar>
           </AppBar>
           {before}
