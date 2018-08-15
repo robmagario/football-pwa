@@ -3,6 +3,7 @@ import EventListAdmin from "./EventListAdmin/EventListAdmin"
 import 'whatwg-fetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import {
   getFromStorage,
   setInStorage,
@@ -14,6 +15,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
+      type: 'input',
       isLoading: true,
       token: '',
       signUpError: '',
@@ -33,6 +35,17 @@ class Login extends Component {
     this.onSignIn = this.onSignIn.bind(this);
     this.onSignUp = this.onSignUp.bind(this);
     this.logout = this.logout.bind(this);
+
+    this.showHide = this.showHide.bind(this);
+  }
+
+
+  showHide(e){
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({
+      type: this.state.type === 'input' ? 'password' : 'input'
+    })
   }
 
   componentDidMount() {
@@ -240,16 +253,17 @@ class Login extends Component {
 
             <div className="inputbox"><span className="before"></span>
               <input
-                type="password"
+                type={this.state.type}
                 placeholder="Password"
                 value={signInPassword}
                 onChange={this.onTextboxChangeSignInPassword}
                 className="form-input"
               />
               <span className="after">
-              <button className="password-reveal -show" title="Show password" type="button" tabIndex="-1"><FontAwesomeIcon icon={faEye}
-                                                                                                                           style={{width: '1.25rem', height: '1.25rem'}}/>
-            </button>
+
+                <span className="password__show" onClick={this.showHide}>{this.state.type === 'input' ? <FontAwesomeIcon icon={faEye}
+                                                                                                                         style={{width: '1.25rem', height: '1.25rem'}}/> : <FontAwesomeIcon icon={faEyeSlash}
+                                                                                                                                  style={{width: '1.25rem', height: '1.25rem'}}/>}</span>
             </span>
             </div>
 
