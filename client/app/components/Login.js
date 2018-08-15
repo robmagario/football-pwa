@@ -259,12 +259,12 @@ class Login extends Component {
                 onChange={this.onTextboxChangeSignInPassword}
                 className="form-input"
               />
-              <span className="after">
+
 
                 <span className="password__show" onClick={this.showHide}>{this.state.type === 'input' ? <FontAwesomeIcon icon={faEye}
                                                                                                                          style={{width: '1.25rem', height: '1.25rem'}}/> : <FontAwesomeIcon icon={faEyeSlash}
                                                                                                                                   style={{width: '1.25rem', height: '1.25rem'}}/>}</span>
-            </span>
+
             </div>
 
 
