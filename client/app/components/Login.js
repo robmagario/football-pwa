@@ -15,7 +15,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      type: 'input',
+      type: 'password',
       isLoading: true,
       token: '',
       signUpError: '',
