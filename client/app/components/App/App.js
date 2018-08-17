@@ -106,7 +106,7 @@ const styles = theme => ({
     fontSize: "0.7rem",
     height: "0.7rem",
     letterSpacing: "0.1rem",
-    
+
   },
   input: {
     display: 'none',
@@ -244,7 +244,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-              <a  href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
+              <a style={{textDecoration:"none"}} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
             </Toolbar>
           </AppBar>
           {before}
