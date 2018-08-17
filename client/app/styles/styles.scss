@@ -23,6 +23,16 @@ $secondary: #727272;
 
 }
 
+a {
+  textDecoration: none;
+  color: white;
+}
+
+a:hover {
+  background-color: #00b073;
+}
+
+
 h1 {
   font-size: 2.2em;
   color: white;

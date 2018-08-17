@@ -106,6 +106,7 @@ const styles = theme => ({
     fontSize: "0.7rem",
     height: "0.7rem",
     letterSpacing: "0.1rem",
+    
   },
   input: {
     display: 'none',
@@ -113,9 +114,7 @@ const styles = theme => ({
   toolBar: {
     minHeight: '0.5rem',
   },
-  a: {
-    textDecoration: "none",
-  },
+
   content: {
     flexGrow: 1,
     //backgroundColor: theme.palette.background.default,
@@ -192,20 +191,28 @@ class App extends React.Component {
         </div>
         <Divider/>
         <div className="group-label">Quick Links</div>
-
+        <a  href={"/members/login"}>
         <List>
+
           <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faFutbol}
                                                                     style={{width: '1.25rem', height: '1.25rem'}}/>
           </div>
           <div className={classes.list}>Futebol</div>
+
         </List>
+        </a>
+
         <Divider/>
+        <a  href={"/members/login"}>
         <List>
+
           <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUsers}
                                                                     style={{width: '1.25rem', height: '1.25rem'}}/>
           </div>
           <div className={classes.list}>Política</div>
         </List>
+        </a>
+
 
       </Drawer>
     );
@@ -237,7 +244,7 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-              <a className={classes.a} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
+              <a  href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
             </Toolbar>
           </AppBar>
           {before}
