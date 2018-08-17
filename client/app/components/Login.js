@@ -266,14 +266,11 @@ class Login extends Component {
                                                                                                                                   style={{width: '1.25rem', height: '1.25rem'}}/>}</span>
 
             </div>
-
-
             <br />
             <button className="micro-button -accented " onClick={this.onSignIn}>Entrar</button>
           </div>
           <br />
           <br />
-
 
         </div>
       );
