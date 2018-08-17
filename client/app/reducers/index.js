@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import upcomingevents from "./upevents.reducers";
-import eventodds from "./odds.reducers";
+import user from "./user.reducers"
 
-const rootReducer = combineReducers({upcomingevents,eventodds});
+const rootReducer = combineReducers({upcomingevents,user});
 
 export default rootReducer;

@@ -1,6 +1,18 @@
 const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
+const bcrypt = require('bcrypt');
+var jwt = require('jsonwebtoken');
 
+function generateToken(user) {
+  var u = {
+    email:user.email,
+    admin: user.isAdmin,
+    _id: user._id.toString(),
+  };
+  return token = jwt.sign(u, 'secretkeyhere', {
+    expiresIn: 60 * 60 * 24 // expires in 24 hours
+  });
+}
 
 module.exports = (app) => {
   /*
@@ -61,9 +73,12 @@ module.exports = (app) => {
             message: 'Error: Server error'
           });
         }
+        var token = generateToken(user);
         return res.send({
           success: true,
-          message: 'Signed up'
+          message: 'Signed up',
+          user:user,
+          token:token
         });
       });
     });
@@ -95,88 +110,64 @@ module.exports = (app) => {
 
     email = email.toLowerCase();
     email = email.trim();
+    User.findOne({email:email})
+      .exec(function(err,user){
+          if (err) throw err;
+          if (!user) {
+            return res.send({
+              error: true,
+              message: "Email or password incorrect"
+            });
+          }
+          bcrypt.compare(password, user.password, function (err, valid) {
+            if (!valid) {
+              return res.send({
+                error: true,
+                message: "Email or password incorrect"
+              });
+            }
+            // Otherwise correct user
+            var token = generateToken(user);
+            return res.send({
+              success: true,
+              message: "Signed in!",
+              user: user,
+              token: token
 
-    User.find({
-      email: email
-    }, (err, users) => {
-      if (err) {
-        console.log('err 2:', err);
-        return res.send({
-          success: false,
-          message: 'Error: server error'
-        });
-      }
-      if (users.length != 1) {
-        return res.send({
-          success: false,
-          message: 'Error: Invalid'
-        });
-      }
-
-      const user = users[0];
-      if (!user.validPassword(password)) {
-        return res.send({
-          success: false,
-          message: 'Error: Invalid'
-        });
-      }
-
-      // Otherwise correct user
-      const userSession = new UserSession();
-      userSession.userId = user._id;
-      userSession.adminStatus=user.isAdmin;
-      userSession.save((err, doc) => {
-        if (err) {
-          console.log(err);
-          return res.send({
-            success: false,
-            message: 'Error: server error'
+            });
           });
-        }
-
-        return res.send({
-          success: true,
-          message: 'Valid sign in',
-          isAdmin:user.isAdmin,
-          token: doc._id
         });
-      });
+
+
     });
-  });
+
 
   app.get('/api/account/verify', (req, res, next) => {
     // Get the token
-    const { query } = req;
-    const { token } = query;
+    var token = req.body.token||req.query.token;
     // ?token=test
+    if(!token){
+      return res.send({
+        success:false,
+        message:"Must pass a token"
+      });}
+      jwt.verify(token,'secretkeyhere',function(err,user){
+        if(err)throw err;
+        User.findById({_id:user._id},function(err,user){
+          if(err) throw err;
+          var token = generateToken(user);
+          return res.send({
+            success:true,
+            message:"Verified",
+            token:token,
+            user:user
+          })
+        })
+      })
 
     // Verify the token is one of a kind and it's not deleted.
 
-    UserSession.find({
-      _id: token,
-      isDeleted: false
-    }, (err, sessions) => {
-      if (err) {
-        console.log(err);
-        return res.send({
-          success: false,
-          message: 'Error: Server error'
-        });
-      }
 
-      if (sessions.length != 1) {
-        return res.send({
-          success: false,
-          message: 'Error: Invalid'
-        });
-      } else {
-        return res.send({
-          success: true,
-          message: 'Good',
-          admin:sessions.adminStatus
-        });
-      }
-    });
   });
 
   app.get('/api/account/logout', (req, res, next) => {

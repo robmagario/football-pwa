@@ -57,7 +57,30 @@ if (isDev) {
     res.end();
   });
 }
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Request-Headers", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+app.use(function(req,res,next){
+  var token = req.headers['authorization'];
+  if(!token) return next();
+  token = token.replace('Bearer','');
+  jwt.verify(token, 'secretkeyhere', function(err, user) {
+    if (err) {
+      return res.status(401).json({
+        success: false,
+        message: 'Please register Log in using a valid email to submit posts'
+      });
+    } else {
+      req.user = user; //set the user to req so other routes can use it
+      next();
+    }
+  });
+});
 app.listen(port, '0.0.0.0', (err) => {
   if (err) {
     console.log(err);
