@@ -52,4 +52,15 @@ module.exports = (app)=>{
 
 
   });
+
+  app.get('/api/event/getoptions',(req,res,next)=>{
+    const {query} = req;
+    const{eventslug}=query;
+    Event.findOne({slug:eventslug},(err,options)=>{
+      return res.send({
+        success:true,
+        optionsList:options.options
+      });
+    })
+  })
 };

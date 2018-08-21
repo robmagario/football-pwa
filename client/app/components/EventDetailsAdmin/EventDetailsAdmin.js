@@ -3,13 +3,13 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Timestamp from "react-timestamp";
 import 'whatwg-fetch';
-import {getUpcoming} from "../../actions/upevent.actions";
+import {getOptions} from "../../actions/eventoptions.actions";
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 class EventDetailsAdmin extends Component {
   componentWillMount(){
-    this.props.getUpcoming();
+    this.props.getOptions(location.pathname.split("/")[1]);
   }
 
 
@@ -19,10 +19,9 @@ class EventDetailsAdmin extends Component {
       return(
         <div>
           <ul>
-
-              <li>{location.pathname}</li>
-
-          </ul>
+            {this.props.optionsList.map(option=>
+              <li>Name:{option.name} Win:{option.win} Loss:{option.loss} Amount:{option.amount}</li>
+            )}          </ul>
         </div>
       )
     return(
@@ -33,13 +32,13 @@ class EventDetailsAdmin extends Component {
 
 function mapStateToProps(state,props){
   return{
-    upcomingList:state.upcomingevents.upcomingList,
+    optionsList:state.options.optionsList,
     loading:state.upcomingevents.loading
   }
 }
 function mapDispatchToProps(dispatch){
   return{
-    getUpcoming: bindActionCreators(getUpcoming, dispatch)
+    getOptions: bindActionCreators(getOptions, dispatch)
   }
 }
 

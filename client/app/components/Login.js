@@ -12,7 +12,7 @@ class Login extends Component {
     super(props);
     this.state={
       signInEmail:'',
-      signInPassword:''
+      signInPassword:'',
     };
 
     this.onTextboxChangeSignInEmail = this.onTextboxChangeSignInEmail.bind(this);
@@ -48,6 +48,7 @@ class Login extends Component {
     const {
       signInEmail,
       signInPassword,
+      refresh
     } = this.state;
     this.props.signInUser({signInEmail,signInPassword});
   }
@@ -58,6 +59,7 @@ class Login extends Component {
       signInEmail,
       signInPassword,
     } = this.state;
+
     if (this.props.currentUser === null) {
       return (
         <div id="login-page">
@@ -110,6 +112,7 @@ class Login extends Component {
 function mapStateToProps(state,props){
   return{
     user:state.user.user,
+    loading:state.user.loading,
     currentUser:state.verify.currentUser
   }
 };
