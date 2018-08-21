@@ -1,5 +1,4 @@
 const User = require('../../models/User');
-const UserSession = require('../../models/UserSession');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 
@@ -112,34 +111,34 @@ module.exports = (app) => {
     email = email.trim();
     User.findOne({email:email})
       .exec(function(err,user){
-          if (err) throw err;
-          if (!user) {
+        if (err) throw err;
+        if (!user) {
+          return res.send({
+            error: true,
+            message: "Email or password incorrect"
+          });
+        }
+        bcrypt.compare(password, user.password, function (err, valid) {
+          if (!valid) {
             return res.send({
               error: true,
               message: "Email or password incorrect"
             });
           }
-          bcrypt.compare(password, user.password, function (err, valid) {
-            if (!valid) {
-              return res.send({
-                error: true,
-                message: "Email or password incorrect"
-              });
-            }
-            // Otherwise correct user
-            var token = generateToken(user);
-            return res.send({
-              success: true,
-              message: "Signed in!",
-              user: user,
-              token: token
+          // Otherwise correct user
+          var token = generateToken(user);
+          return res.send({
+            success: true,
+            message: "Signed in!",
+            user: user,
+            token: token
 
-            });
           });
         });
+      });
 
 
-    });
+  });
 
 
   app.get('/api/account/verify', (req, res, next) => {
@@ -151,19 +150,19 @@ module.exports = (app) => {
         success:false,
         message:"Must pass a token"
       });}
-      jwt.verify(token,'secretkeyhere',function(err,user){
-        if(err)throw err;
-        User.findById({_id:user._id},function(err,user){
-          if(err) throw err;
-          var token = generateToken(user);
-          return res.send({
-            success:true,
-            message:"Verified",
-            token:token,
-            user:user
-          })
+    jwt.verify(token,'secretkeyhere',function(err,user){
+      if(err)throw err;
+      User.findById({_id:user._id},function(err,user){
+        if(err) throw err;
+        var token = generateToken(user);
+        return res.send({
+          success:true,
+          message:"Verified",
+          token:token,
+          user:user
         })
       })
+    })
 
     // Verify the token is one of a kind and it's not deleted.
 

@@ -68,7 +68,7 @@ app.use(function(req, res, next) {
 app.use(function(req,res,next){
   var token = req.headers['authorization'];
   if(!token) return next();
-  token = token.replace('Bearer','');
+  token = token.replace('Bearer ','');
   jwt.verify(token, 'secretkeyhere', function(err, user) {
     if (err) {
       return res.status(401).json({

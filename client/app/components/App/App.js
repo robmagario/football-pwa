@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import Main from '../Main';
+import {bindActionCreators} from "redux";
+import {signInUser, verifyUser} from "../../actions/user.actions";
+
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons';
 import {withStyles} from "@material-ui/core/styles/index";
 import classNames from "classnames";
@@ -23,6 +23,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import {faFutbol} from '@fortawesome/free-solid-svg-icons'
+import {connect} from "react-redux";
 
 
 
@@ -149,15 +150,22 @@ const styles = theme => ({
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: false,
       anchor: 'left',
     };
 
   }
+  componentWillMount(){
+    const token = sessionStorage.getItem("jwtToken");
+    if(!token||token===''){
+      return;
+    }
+    this.props.verifyUser(token);
+  }
 
-  render() {
+  render(){
 
 
     this.handleDrawerOpen = () => {
@@ -244,7 +252,9 @@ class App extends React.Component {
               <Typography variant="title" color="inherit" noWrap className={classes.flex}>
                 Habudo
               </Typography>
-              <a style={{textDecoration:"none"}} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>
+              {this.props.currentUser===null?<a style={{textDecoration:"none"}} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>:
+                <a style={{textDecoration:"none"}}><Button variant="contained" className={classes.button} onClick={sessionStorage.clear()} >Logout</Button></a>
+              }
             </Toolbar>
           </AppBar>
           {before}
@@ -272,4 +282,15 @@ App.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(App);
+function mapStateToProps(state,props){
+  return{
+    currentUser:state.verify.currentUser
+  }
+};
+function mapDispatchToProps(dispatch){
+  return{
+    verifyUser:bindActionCreators(verifyUser,dispatch)
+  }
+}
+
+export default  connect (mapStateToProps,mapDispatchToProps)(withStyles(styles, { withTheme: true })(App));

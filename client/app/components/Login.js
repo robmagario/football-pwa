@@ -5,7 +5,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import {signInUser} from "../actions/user.actions";
+import {signInUser,verifyUser} from "../actions/user.actions";
 
 class Login extends Component {
   constructor(props) {
@@ -19,6 +19,8 @@ class Login extends Component {
     this.onTextboxChangeSignInPassword = this.onTextboxChangeSignInPassword.bind(this);
     this.showHide = this.showHide.bind(this);
     this.onSignIn = this.onSignIn.bind(this);
+    this.onLogout = this.onSignIn.bind(this);
+
   }
   showHide(e){
     e.preventDefault();
@@ -56,7 +58,8 @@ class Login extends Component {
       signInEmail,
       signInPassword,
     } = this.state;
-    return (
+    if (this.props.currentUser === null) {
+      return (
         <div id="login-page">
           <div className=".form-page-header">
             <h1>Entrar</h1>
@@ -68,7 +71,7 @@ class Login extends Component {
               onChange={this.onTextboxChangeSignInEmail}
               className="form-input"
             />
-            <br />
+            <br/>
             <label htmlFor="login-form-password" className="field-label">Senha</label>
 
 
@@ -80,28 +83,39 @@ class Login extends Component {
                 onChange={this.onTextboxChangeSignInPassword}
                 className="form-input"
               />
-                <span className="password__show" onClick={this.showHide}>{this.state.type === 'input' ? <FontAwesomeIcon icon={faEye}
-                                                                                                                         style={{width: '1.25rem', height: '1.25rem'}}/> : <FontAwesomeIcon icon={faEyeSlash}
-                                                                                                                                  style={{width: '1.25rem', height: '1.25rem'}}/>}</span>
+              <span className="password__show" onClick={this.showHide}>{this.state.type === 'input' ?
+                <FontAwesomeIcon icon={faEye}
+                                 style={{width: '1.25rem', height: '1.25rem'}}/> : <FontAwesomeIcon icon={faEyeSlash}
+                                                                                                    style={{
+                                                                                                      width: '1.25rem',
+                                                                                                      height: '1.25rem'
+                                                                                                    }}/>}</span>
             </div>
-            <br />
-            <button className="micro-button -accented " onClick={this.onSignIn}>Entrar {(this.props.user===null)? null:this.props.user.email}</button>
+            <br/>
+            <button className="micro-button -accented "
+                    onClick={this.onSignIn}>Entrar {(this.props.user === null) ? null : this.props.user.email}</button>
           </div>
-          <br />
-          <br />
+          <br/>
+          <br/>
 
         </div>
       );
     }
+    return(
+      <div>      {this.props.currentUser.isAdmin?<p>Hi ADMIN</p>:null}
+        Already Logged in!</div>
+    )
+  }
 }
 function mapStateToProps(state,props){
   return{
-    user:state.user.user
+    user:state.user.user,
+    currentUser:state.verify.currentUser
   }
 };
 function mapDispatchToProps(dispatch){
   return{
-    signInUser: bindActionCreators(signInUser,dispatch)
+    signInUser: bindActionCreators(signInUser,dispatch),
   }
 }
 export default connect (mapStateToProps,mapDispatchToProps)(Login);

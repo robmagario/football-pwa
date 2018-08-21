@@ -3,7 +3,8 @@ import {SIGNIN_USER_REQUEST,SIGNIN_USER_FAILURE,SIGNIN_USER_SUCCESS} from "../ac
 let initialState = {
   loading:false,
   error:null,
-  user:null
+  user:null,
+  currentUser:null
 };
 
 export default function(state = initialState, action) {
