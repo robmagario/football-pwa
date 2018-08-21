@@ -167,7 +167,10 @@ class App extends React.Component {
 
   render(){
 
-
+  this.logout=()=>{
+  sessionStorage.clear();
+  window.location.reload()
+    };
     this.handleDrawerOpen = () => {
       this.setState({open: true});
     };
@@ -253,7 +256,7 @@ class App extends React.Component {
                 Habudo
               </Typography>
               {this.props.currentUser===null?<a style={{textDecoration:"none"}} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>:
-                <a style={{textDecoration:"none"}}><Button variant="contained" className={classes.button} onClick={sessionStorage.clear()} >Logout</Button></a>
+                <a style={{textDecoration:"none"}}><Button variant="contained" className={classes.button} onClick={this.logout} >Logout</Button></a>
               }
             </Toolbar>
           </AppBar>
