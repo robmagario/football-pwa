@@ -48,7 +48,6 @@ class Login extends Component {
     const {
       signInEmail,
       signInPassword,
-      refresh
     } = this.state;
     this.props.signInUser({signInEmail,signInPassword});
   }

@@ -5,10 +5,12 @@ module.exports = (app)=>{
     const{query}=req;
     const{name} = query;
     const {category}=query;
+    const {amount} = query;
     const newEvent = new Event();
     newEvent.name = name;
     newEvent.slug = name.toLowerCase().replace(/ /g,'-');
     newEvent.category  = category;
+    newEvent.amount = amount;
     newEvent.save((err, event) => {
       if (err) {
         return res.send({
@@ -18,7 +20,9 @@ module.exports = (app)=>{
       }
       return res.send({
         success: true,
-        message: 'Event Created!'
+        message: 'Event Created!',
+        event:event
+
       });
     });
   });
@@ -29,5 +33,5 @@ module.exports = (app)=>{
         eventList:events
       })
     });
-  })
+  });
 };

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Timestamp from "react-timestamp";
 import 'whatwg-fetch';
-import {getUpcoming} from "../../actions/upevent.actions";
+import {getUpcoming,createEvent} from "../../actions/upevent.actions";
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -14,18 +14,55 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 class EventListAdmin extends Component {
-  componentWillMount(){
-    this.props.getUpcoming();
+  constructor(props){
+    super(props);
     this.state = {
       open: false,
+      name:'',
+      category:'',
+      amount:0,
     };
+    this.onTextboxChangeName = this.onTextboxChangeName.bind(this);
+    this.onTextboxChangeCategory = this.onTextboxChangeCategory.bind(this);
+    this.onTextboxChangeAmount = this.onTextboxChangeAmount.bind(this);
+
+    this.makeEvent = this.makeEvent.bind(this);
+  }
+  onTextboxChangeName(event){
+    this.setState({
+      name:event.target.value
+    })
+  }
+  onTextboxChangeCategory(event) {
+    this.setState({
+      category: event.target.value
+    })
+  }
+
+  onTextboxChangeAmount(event) {
+    this.setState({
+      amount: event.target.value
+    })
+  }
+    componentWillMount(){
+    this.props.getUpcoming();
+
+  }
+  makeEvent(){
+    const{name,amount,category}=this.state;
+    this.props.createEvent({name,amount,category});
+    window.location.reload();
   }
 
 
 
 
-
   render(){
+    const{
+      name,
+      category,
+      amount
+    }  =this.state;
     this.handleClickOpen = () => {
       this.setState({ open: true });
     };
@@ -59,6 +96,8 @@ class EventListAdmin extends Component {
             autoFocus
             margin="dense"
             id="name"
+            value={name}
+            onChange={this.onTextboxChangeName}
             label="Name of the event"
             type="text"
             fullWidth
@@ -67,6 +106,8 @@ class EventListAdmin extends Component {
             autoFocus
             margin="dense"
             id="name"
+            value={category}
+            onChange={this.onTextboxChangeCategory}
             label="Category"
             type="text"
             fullWidth
@@ -76,6 +117,8 @@ class EventListAdmin extends Component {
             margin="dense"
             id="name"
             label="Amount"
+            value={amount}
+            onChange={this.onTextboxChangeAmount}
             type="number"
             defaultValue={10000}
             fullWidth
@@ -85,8 +128,8 @@ class EventListAdmin extends Component {
           <Button onClick={this.handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={this.handleClose} color="primary">
-            Subscribe
+          <Button onClick={this.makeEvent} color="primary">
+            Create Event
           </Button>
         </DialogActions>
       </Dialog>
@@ -107,7 +150,9 @@ function mapStateToProps(state,props){
 }
 function mapDispatchToProps(dispatch){
   return{
-    getUpcoming: bindActionCreators(getUpcoming, dispatch)
+    getUpcoming: bindActionCreators(getUpcoming, dispatch),
+    createEvent: bindActionCreators(createEvent, dispatch)
+
   }
 }
 
