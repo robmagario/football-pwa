@@ -24,8 +24,20 @@ class EventDetailsAdmin extends Component {
     super(props);
     this.state = {
       open: false,
-
+      name:'',
+      amount:'',
+      win:'',
+      loss:''
     };
+    this.createOption = this.createOption.bind(this);
+  }
+  createOption(){
+    const{name,amount,win,loss}=this.state;
+    fetch('/api/create/createoption?name='+name+'&win='+win+'&loss='+loss+'&thumbnail=here&amount='+amount+"&event="+location.pathname.split("/")[1],{method:'POST'})
+      .then(res=>res.json(),error=>console.log(error))
+      .then(json=>console.log(json.message));
+    window.location.reload();
+
   }
   componentWillMount(){
     this.props.getOptions(location.pathname.split("/")[1]);
@@ -68,6 +80,8 @@ class EventDetailsAdmin extends Component {
                   autoFocus
                   margin="dense"
                   id="name"
+                  value={this.state.name}
+                  onChange={this.handleChange('name')}
                   label="Name of the option"
                   type="text"
                   fullWidth
@@ -77,6 +91,8 @@ class EventDetailsAdmin extends Component {
                   margin="dense"
                   id="name"
                   label="Win"
+                  value={this.state.win}
+                  onChange={this.handleChange('win')}
                   type="number"
                   defaultValue="1.0"
                   fullWidth
@@ -85,6 +101,8 @@ class EventDetailsAdmin extends Component {
                   autoFocus
                   margin="dense"
                   id="name"
+                  value={this.state.loss}
+                  onChange={this.handleChange('loss')}
                   label="Loss"
                   type="number"
                   defaultValue="1.0"
@@ -105,7 +123,7 @@ class EventDetailsAdmin extends Component {
                 <Button onClick={this.handleClose} color="primary">
                   Cancel
                 </Button>
-                <Button onClick={this.handleClose} color="primary">
+                <Button onClick={this.createOption} color="primary">
                   Add new option
                 </Button>
               </DialogActions>

@@ -81,7 +81,7 @@ class EventListAdmin extends Component {
         </ul>
 
       <div>
-      <Button onClick={this.handleClickOpen} className="micro-button -accented ">Add new event</Button>
+        {this.props.currentUser===null?null:(this.props.currentUser.isAdmin?<Button onClick={this.handleClickOpen} className="micro-button -accented ">Add new event</Button>:null)}
       <Dialog
         open={this.state.open}
         onClose={this.handleClose}
@@ -145,7 +145,8 @@ class EventListAdmin extends Component {
 function mapStateToProps(state,props){
   return{
     upcomingList:state.upcomingevents.upcomingList,
-    loading:state.upcomingevents.loading
+    loading:state.upcomingevents.loading,
+    currentUser:state.verify.currentUser
   }
 }
 function mapDispatchToProps(dispatch){
