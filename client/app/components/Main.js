@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import EventDetailsAdmin from "./EventDetailsAdmin/EventDetailsAdmin";
 import EventListAdmin from "./EventListAdmin/EventListAdmin"
 import HelloWorld from "./HelloWorld/HelloWorld";
+import ProfilePage from "./ProfilePage/ProfilePage"
 import Login from "./Login";
 
 
@@ -17,7 +18,9 @@ const Main = () => (
       <Route path="/helloworld" component={HelloWorld}/>
       <Route path="/members/login" component={Login}/>
       <Route path="/events" component={EventListAdmin}/>
+      <Route path="/profile" component={ProfilePage}/>
       <Route path="/" component={EventDetailsAdmin}/>
+
 
     </Switch>
   </main>

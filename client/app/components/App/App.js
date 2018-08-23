@@ -214,7 +214,7 @@ class App extends React.Component {
         </a>
 
         <Divider/>
-        <a  href={"/members/login"}>
+        <a  href={"/events"}>
         <List>
 
           <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUsers}
