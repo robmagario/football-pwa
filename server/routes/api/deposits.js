@@ -13,6 +13,7 @@ module.exports = (app)=>{
     newDeposit.amount = amount;
     newDeposit.advice = advice;
 
+
     newDeposit.save((err,deposit)=>{
       if(err){
         return res.send({
@@ -25,33 +26,45 @@ module.exports = (app)=>{
         message:"Deposit Request Sent",
         deposit:deposit
       })
-    })
+    });
 
   });
   app.post('/api/deposit/confirmdeposit',(req,res,next)=>{
-    const{query} = req;
-    const {depositID} = query;
-    Deposit.findOneAndUpdate({_id:depositID},{$set:{confirmed:true}},function(err,deposit){
+    const {query}=req;
+    const{depositID,transID}=query;
+    Deposit.find({transactionID:transID},(err,prevdeposits)=>{
       if(err){
         return res.send({
           success:false,
-          message:"No such deposit request"
-        })
+          message:"Server Error"
+        });
       }
-      User.findOneAndUpdate({_id:deposit.user},{$inc:{bankAmount:deposit.amount}},{new:true},function(err,deposit){
-        if(err){
-          return res.send({
-            success:false,
-            message:"No such user"
-          })
+      Deposit.find({_id:depositID},(err,deposit)=>{
+        if(prevdeposits.length>0){
+          Deposit.findOneAndUpdate({_id:depositID},{$set:{status:"Rejected"}},(err,deposit)=>{
+            return res.send({
+              success:false,
+              message:"Rejected"
+            });
+          });
         }
-        return res.send({
-          success:true,
-          message:"Deposit Confirmed"
-        })
-      });
-    });
-    });
+        else{
+          Deposit.findOneAndUpdate({_id:depositID},{$set:{status:"Confirmed",transactionID:transID}},(err,deposit)=>{
+            User.findOneAndUpdate({_id:deposit.user},{$inc:{bankAmount:deposit.amount}},(err,user)=>{
+              return res.send({
+                success:true,
+                message:"Deposit Confirmed",
+                deposit:deposit,
+                user:user
+              })
+            });
+
+          });
+
+        }
+      })
+    })
+  });
 
     app.get('/api/deposit/getdepositrequests',(req,res,next)=>{
       Deposit.find({},(err,deposits)=>{
