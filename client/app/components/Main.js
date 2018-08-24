@@ -3,11 +3,11 @@ import React from "react";
 import { Switch, Route } from 'react-router-dom';
 import Home from './Home/Home';
 import EventDetailsAdmin from "./EventDetailsAdmin/EventDetailsAdmin";
-import EventListAdmin from "./EventListAdmin/EventListAdmin"
+import EventListAdmin from "./EventListAdmin/EventListAdmin";
 import HelloWorld from "./HelloWorld/HelloWorld";
-import ProfilePage from "./ProfilePage/ProfilePage"
+import ProfilePage from "./ProfilePage/ProfilePage";
 import Login from "./Login";
-import AdminDepositRequest from "./AdminDepositRequest/AdminDepositRequest"
+import AdminDepositRequest from "./AdminDepositRequest/AdminDepositRequest";
 
 
 
