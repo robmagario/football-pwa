@@ -57,49 +57,56 @@ class AdminDepositRequest extends Component {
     this.handleChange = prop => event => {
       this.setState({ [prop]: event.target.value });
     };
+    if(this.props.currentUser!=null){
+      if(this.props.currentUser.isAdmin){
 
+        return(
+          <div style={{width:"50%"}}>
+            <ul>
+              {this.props.depositList.map(deposit=>
+                <li>User:{deposit.user} Amount:{deposit.amount} Transaction ID:{deposit.transactionID} Status:{deposit.status}
+                  {(deposit.status!=="Pending")?null:<Button onClick={()=>this.setdeposit(deposit._id)} className="micro-button -accented ">Confirm</Button>}</li>
+              )}          </ul>
+            <div>
+              <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+                style={{height:"500px"}}
+              >
+                <DialogTitle id="form-dialog-title">Confirm Deposit</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Please enter transaction ID to complete confirmation
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    value={this.state.transid}
+                    onChange={this.handleChange('transid')}
+                    label="Transaction ID"
+                    type="text"
+                    fullWidth
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handleClose} color="primary">
+                    Cancel
+                  </Button>
+                  <Button onClick={this.confirmDeposit} color="primary">
+                    Confirm Deposit
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          </div>
+        );
+      }
+    }
     return(
-      <div style={{width:"50%"}}>
-        <ul>
-          {this.props.depositList.map(deposit=>
-            <li>User:{deposit.user} Amount:{deposit.amount} Transaction ID:{deposit.transactionID} Status:{deposit.status}
-            {(deposit.status!=="Pending")?null:<Button onClick={()=>this.setdeposit(deposit._id)} className="micro-button -accented ">Confirm</Button>}</li>
-          )}          </ul>
-        <div>
-          <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-            style={{height:"500px"}}
-          >
-            <DialogTitle id="form-dialog-title">Confirm Deposit</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Please enter transaction ID to complete confirmation
-              </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="name"
-                value={this.state.transid}
-                onChange={this.handleChange('transid')}
-                label="Transaction ID"
-                type="text"
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.confirmDeposit} color="primary">
-                Confirm Deposit
-              </Button>
-            </DialogActions>
-          </Dialog>
-        </div>
-      </div>
-    );
+      <div style={{color:'white'}}>You Do not have privileges to view this</div>
+    )
 
   }
 }
@@ -107,7 +114,8 @@ class AdminDepositRequest extends Component {
 function mapStateToProps(state,props){
   return{
     depositList:state.deposits.depositList,
-    loading:state.deposits.loading
+    loading:state.deposits.loading,
+    currentUser:state.verify.currentUser
   }
 }
 function mapDispatchToProps(dispatch){

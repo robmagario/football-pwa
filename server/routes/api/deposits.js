@@ -74,6 +74,16 @@ module.exports = (app)=>{
         })
       });
     });
+  app.get('/api/deposit/getuserdepositrequests',(req,res,next)=>{
+    const{query}=req;
+    const{userid}=query;
+    Deposit.find({user:userid},(err,deposits)=>{
+      return res.send({
+        success:true,
+        userDepositList:deposits
+      })
+    });
+  });
 
 
 };
