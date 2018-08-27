@@ -261,7 +261,7 @@ class App extends React.Component {
                 (<div>
                   <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUser}
                                                                             style={{width: '1.25rem', height: '1.25rem'}}/>
-                  </div>Account: {this.props.currentUser.bankAmount}<a style={{textDecoration:"none"}}><Button variant="contained" className={classes.button} onClick={this.logout} >Logout</Button></a></div>)
+                  </div> Account: {this.props.currentUser.bankAmount}<a style={{textDecoration:"none"}}>  <Button variant="contained" className={classes.button} onClick={this.logout} >Logout</Button></a></div>)
               }
             </Toolbar>
           </AppBar>
