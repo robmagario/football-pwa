@@ -8,6 +8,7 @@ import HelloWorld from "./HelloWorld/HelloWorld";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import Login from "./Login";
 import AdminDepositRequest from "./AdminDepositRequest/AdminDepositRequest";
+import DepositRequest from './DepositRequest/DepositRequest';
 
 
 
@@ -21,6 +22,7 @@ const Main = () => (
       <Route path="/events" component={EventListAdmin}/>
       <Route path="/profile" component={ProfilePage}/>
       <Route path="/admindeposit" component={AdminDepositRequest}/>
+      <Route path="/depositrequest" component={DepositRequest}/>
       <Route path="/" component={EventDetailsAdmin}/>
 
 
