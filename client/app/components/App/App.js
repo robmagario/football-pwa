@@ -48,7 +48,6 @@ const styles = theme => ({
   appBar: {
     position: 'fixed',
 
-
     backgroundColor: '#000000',
   },
   appBarShift: {
@@ -155,9 +154,11 @@ class App extends React.Component {
     this.state = {
       open: false,
       anchor: 'left',
+      open2: false,
     };
 
   }
+
   componentWillMount(){
     const token = sessionStorage.getItem("jwtToken");
     if(!token||token===''){
@@ -172,24 +173,31 @@ class App extends React.Component {
   sessionStorage.clear();
   window.location.reload()
     };
-    this.handleDrawerOpen = () => {
+    this.handleLeftDrawerOpen = () => {
       this.setState({open: true});
     };
 
-    this.handleDrawerClose = () => {
+    this.handleLeftDrawerClose = () => {
       this.setState({open: false});
     };
 
+    this.handleRightDrawerOpen = () => {
+      this.setState({open2: true});
+    };
+
+    this.handleRightDrawerClose = () => {
+      this.setState({open2: false});
+    };
     this.handleChangeAnchor = event => {
       this.setState({
         anchor: event.target.value,
       });
     };
     const {classes, theme} = this.props;
-    const {anchor, open} = this.state;
+    const {anchor, open,open2} = this.state;
 
 
-    const drawer = (
+    const LeftDrawer = (
       <Drawer
         variant="persistent"
         anchor={anchor}
@@ -224,18 +232,60 @@ class App extends React.Component {
           <div className={classes.list}>Política</div>
         </List>
         </a>
-
-
       </Drawer>
+
+    );
+    const RightDrawer = (
+      <Drawer
+        variant="persistent"
+        anchor={anchor}
+        open={open2}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+
+        </div>
+        <Divider/>
+        <div className="group-label">Account</div>
+        <a  href={"/members/login"}>
+          <List>
+
+            <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faFutbol}
+                                                                      style={{width: '1.25rem', height: '1.25rem'}}/>
+            </div>
+            <div className={classes.list}>fdfdfdfdfd</div>
+
+          </List>
+        </a>
+
+        <Divider/>
+        <a  href={"/events"}>
+          <List>
+
+            <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUsers}
+                                                                      style={{width: '1.25rem', height: '1.25rem'}}/>
+            </div>
+            <div className={classes.list}>eeeee</div>
+          </List>
+        </a>
+      </Drawer>
+
     );
 
     let before = null;
     let after = null;
 
     if (anchor === 'left') {
-      before = drawer;
+      before = LeftDrawer;
     } else {
-      after = drawer;
+      after = LeftDrawer;
+    }
+    if (anchor === 'right') {
+      before = RightDrawer;
+    } else {
+      after = RightDrawer;
     }
 
     return (
@@ -247,8 +297,8 @@ class App extends React.Component {
               <IconButton
 
                 color="inherit"
-                aria-label="Open drawer"
-                onClick={(!open) ? this.handleDrawerOpen : this.handleDrawerClose}
+                aria-label="Open Leftdrawer"
+                onClick={(!open) ? this.handleLeftDrawerOpen : this.handleLeftDrawerClose}
                 className={classNames(classes.menuButton, open)}
               >
                 <MenuIcon/>
@@ -259,7 +309,7 @@ class App extends React.Component {
               {this.props.currentUser===null?<a style={{textDecoration:"none"}} href={"/members/login"}><Button variant="contained" className={classes.button} >Entrar</Button></a>:
 
                 (<div>
-                  <div className={classes.fontawesomeicon}><FontAwesomeIcon icon={faUser}
+                  <div className={classes.fontawesomeicon} onClick={(!open2) ? this.handleRightDrawerOpen : this.handleRightDrawerClose}><FontAwesomeIcon icon={faUser}
                                                                             style={{width: '1.25rem', height: '1.25rem'}}/>
                   </div> Account: {this.props.currentUser.bankAmount}<a style={{textDecoration:"none"}}>  <Button variant="contained" className={classes.button} onClick={this.logout} >Logout</Button></a></div>)
               }
@@ -267,7 +317,7 @@ class App extends React.Component {
           </AppBar>
           {before}
 
-            <main onClick={this.handleDrawerClose}
+            <main onClick={()=>{this.handleLeftDrawerClose;this.handleRightDrawerClose}}
               className={classNames(classes.content, classes[`content-${anchor}`], {
                 [classes.contentShift]: open,
                 [classes[`contentShift-${anchor}`]]: open,
