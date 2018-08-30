@@ -64,7 +64,7 @@ class AdminDepositRequest extends Component {
           <div style={{width:"50%"}}>
             <ul>
               {this.props.depositList.map(deposit=>
-                <li>User:{deposit.user} Amount:{deposit.amount} Transaction ID:{deposit.transactionID} Status:{deposit.status}
+                <li>User:{deposit.user} Amount:{deposit.amount} Transaction ID:{deposit.transactionID} Status:{deposit.status} Advice: <img src={deposit.advice}/>
                   {(deposit.status!=="Pending")?null:<Button onClick={()=>this.setdeposit(deposit._id)} className="micro-button -accented ">Confirm</Button>}</li>
               )}          </ul>
             <div>

@@ -1,5 +1,6 @@
 const User =require('../../models/User');
 const Deposit = require('../../models/Deposit');
+var base64Img = require('base64-img');
 
 module.exports = (app)=>{
   app.post('/api/deposit/depositrequest',(req,res,next)=>{
@@ -76,8 +77,8 @@ module.exports = (app)=>{
     });
   app.get('/api/deposit/getuserdepositrequests',(req,res,next)=>{
     const{query}=req;
-    const{userid}=query;
-    Deposit.find({user:userid},(err,deposits)=>{
+    const{userID}=query;
+    Deposit.find({user:userID},(err,deposits)=>{
       return res.send({
         success:true,
         userDepositList:deposits
