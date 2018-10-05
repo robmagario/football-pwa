@@ -174,18 +174,22 @@ class App extends React.Component {
   window.location.reload()
     };
     this.handleLeftDrawerOpen = () => {
+      this.setState({anchor: "left"});
       this.setState({open: true});
     };
 
     this.handleLeftDrawerClose = () => {
+      this.setState({anchor: "left"});
       this.setState({open: false});
     };
 
     this.handleRightDrawerOpen = () => {
+      this.setState({anchor: "right"});
       this.setState({open2: true});
     };
 
     this.handleRightDrawerClose = () => {
+      this.setState({anchor: "right"});
       this.setState({open2: false});
     };
     this.handleChangeAnchor = event => {
