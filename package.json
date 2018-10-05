@@ -1,11 +1,11 @@
 {
-  "name": "MERN-boilerplate",
+  "name": "Magario-Football-App",
   "version": "1.0.0",
-  "description": "MERN stack project boilerplate",
-  "author": "Eugene Cheung",
+  "description": "Magario Football App",
+  "author": "Magario",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arkon/MERN-boilerplate.git"
+    "url": "git+https://github.com/robmagario/football-pwa.git"
   },
   "proxy": "http://localhost:8080",
   "license": "MIT",
@@ -49,6 +49,7 @@
     "jsonwebtoken": "^8.3.0",
     "material-ui": "^0.20.1",
     "mongoose": "^5.0.11",
+    "node-pre-gyp": "^0.11.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.17.2",
     "postcss-loader": "^2.1.3",
