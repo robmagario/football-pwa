@@ -1,4 +1,3 @@
-
 export const SIGNIN_USER_REQUEST = 'SIGNIN_USER_REQUEST';
 export const SIGNIN_USER_SUCCESS = 'SIGNIN_USER_SUCCESS';
 export const SIGNIN_USER_FAILURE = 'SIGNIN_USER_FAILURE';
@@ -22,6 +21,7 @@ export function signInUserSuccess(user) {
     type: SIGNIN_USER_SUCCESS,
     loading:false,
     error:null,
+    message:"You are signed in!",
     user
   };
 }
@@ -30,6 +30,7 @@ export function signInUserFailure(error) {
   return {
     type: SIGNIN_USER_FAILURE,
     loading:false,
+    message:"Authentication Error",
     user:null,
     error
   };

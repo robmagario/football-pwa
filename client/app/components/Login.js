@@ -50,6 +50,7 @@ class Login extends Component {
       signInPassword,
     } = this.state;
     this.props.signInUser({signInEmail,signInPassword});
+
   }
 
 
@@ -94,7 +95,7 @@ class Login extends Component {
             </div>
             <br/>
             <button className="micro-button -accented "
-                    onClick={this.onSignIn}>Entrar {(this.props.user === null) ? null : this.props.user.email}</button>
+                    onClick={this.onSignIn}>Entrar</button>
           </div>
           <br/>
           <br/>
@@ -104,7 +105,7 @@ class Login extends Component {
     }
     return(
       <div>      {this.props.currentUser.isAdmin?<p>Hi ADMIN</p>:null}
-        Already Logged in!</div>
+        </div>
     )
   }
 }
