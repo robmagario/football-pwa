@@ -7,13 +7,12 @@
     "type": "git",
     "url": "git+https://github.com/robmagario/football-pwa.git"
   },
-  "proxy": "http://localhost:8080",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack -p --progress --profile --colors && node server",
-    "start:dev": "node server",
-    "build": "webpack --config webpack.config.js"
+    "parcel:dev": "./node_modules/.bin/parcel index.html",
+    "parcel:watch": "./node_modules/.bin/parcel watch index.html",
+    "parcel:build": "./node_modules/.bin/parcel build index.html"
   },
   "engines": {
     "node": ">=6"
@@ -51,6 +50,7 @@
     "node-pre-gyp": "^0.11.0",
     "node-sass": "^4.9.3",
     "nodemon": "^1.18.4",
+    "parcel-bundler": "^1.10.3",
     "postcss-loader": "^2.1.3",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
@@ -66,7 +66,6 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-middleware": "^3.4.0",
     "webpack-hot-middleware": "^2.24.2",
