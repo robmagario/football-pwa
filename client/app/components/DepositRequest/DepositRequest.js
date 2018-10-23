@@ -10,7 +10,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Webcam from 'react-webcam';
+
+
+import Camera from 'react-html5-camera-photo';
 
 class DepositRequest extends Component{
   constructor(props) {
@@ -26,14 +28,10 @@ class DepositRequest extends Component{
     this.getDeposits =this.getDeposits.bind(this);
     this.makeDeposit = this.makeDeposit.bind(this);
   }
-  setRef = webcam => {
-    this.webcam = webcam;
-  };
-
-  capture = () => {
-    const imageSrc = this.webcam.getScreenshot();
-    this.setState({advice:imageSrc});
-  };
+  onTakePhoto (dataUri) {
+    // Do stuff with the dataUri photo...
+    console.log('takePhoto');
+  }
   getDeposits(){
     this.props.getUserDeposits(this.props.currentUser._id);
     this.setState({loaded:true});
@@ -42,7 +40,7 @@ class DepositRequest extends Component{
     const {amount, advice} = this.state;
     fetch('/api/deposit/depositrequest?userid=' + this.props.currentUser._id + "&advice=" + advice + "&amount=" + amount, {method: 'POST'})
       .then(res => res.json(), error => console.log(error))
-      .then(json => console.log(json.message));
+      .then(json => console.log(""));
 
 
   }
@@ -68,6 +66,7 @@ class DepositRequest extends Component{
       else{
         return(
           <div>
+
             <ul>
             {this.props.userDepositList.map(deposit=>
             <li>Deposit ID: {deposit._id} Amount: {deposit.amount}  Advice:<img src="../../../../out.jpg"/> Status:{deposit.status}</li>
@@ -75,6 +74,7 @@ class DepositRequest extends Component{
             </ul>
             <Button onClick={this.handleClickOpen} className="micro-button -accented ">Add Deposit</Button>
             <div>
+
               <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}
@@ -96,15 +96,10 @@ class DepositRequest extends Component{
                     type="Number"
                     fullWidth
                   />
-                  <Webcam
-                    audio={false}
-                    height={350}
-                    ref={this.setRef}
-                    screenshotFormat="image/png"
-                    width={350}
+                  <form encType="multipart/form-data" action="../../uploads/image" method="post">
+                    <input type="file" accept="image/*" capture="user"/>
+                  </form>
 
-                  />
-                  <button onClick={this.capture}>Capture photo</button>
                   <img src={this.state.advice}/>
                 </DialogContent>
                 <DialogActions>
