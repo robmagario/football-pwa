@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "parcel client/app/index.js",
     "build": "parcel build client/app/index.js"
-  },
+  },     
   "engines": {
     "node": ">=6"
   },
